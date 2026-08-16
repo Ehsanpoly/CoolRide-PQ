@@ -1,0 +1,26 @@
+name: Engineering feature
+description: Propose a model, adapter, validation or operator capability
+title: "[feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Engineering problem
+      description: What measurable problem or missing interface does this address?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and validation
+      description: What dataset, OEM information, HIL test or standard requirement supports it?
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety, cybersecurity and units
+      description: List failure modes, authority boundary, units and sign conventions.
+    validations:
+      required: true

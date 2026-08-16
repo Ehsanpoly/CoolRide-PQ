@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coolride-pq.org/schemas/telemetry.schema.json",
+  "title": "CoolRide-PQ telemetry snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "timestamp", "hour", "quality", "pcc_active_power_mw",
+    "pcc_reactive_power_mvar", "pcc_voltage_pu", "frequency_hz",
+    "thdv_percent", "it_power_mw", "cooling_power_mw",
+    "maximum_inlet_temperature_c", "bess_soc", "thermal_soc"
+  ],
+  "properties": {
+    "timestamp": {"type": "string", "format": "date-time"},
+    "hour": {"type": "number", "minimum": 0, "maximum": 24},
+    "quality": {"enum": ["good", "stale", "bad"]},
+    "pcc_active_power_mw": {"type": "number"},
+    "pcc_reactive_power_mvar": {"type": "number"},
+    "pcc_voltage_pu": {"type": "number", "minimum": 0, "maximum": 2},
+    "frequency_hz": {"type": "number", "minimum": 40, "maximum": 70},
+    "thdv_percent": {"type": "number", "minimum": 0},
+    "it_power_mw": {"type": "number", "minimum": 0},
+    "cooling_power_mw": {"type": "number", "minimum": 0},
+    "maximum_inlet_temperature_c": {"type": "number"},
+    "bess_soc": {"type": "number", "minimum": 0, "maximum": 1},
+    "thermal_soc": {"type": "number", "minimum": 0, "maximum": 1},
+    "grid_alert": {"type": "boolean", "default": false},
+    "operator_enable": {"type": "boolean", "default": true}
+  }
+}

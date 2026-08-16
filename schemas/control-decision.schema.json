@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coolride-pq.org/schemas/control-decision.schema.json",
+  "title": "CoolRide-PQ supervisory decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mode", "advisory_only", "bess_active_power_mw",
+    "bess_reactive_power_mvar", "thermal_power_mw", "it_defer_mw",
+    "cooling_setpoint_delta_c", "active_filter_percent",
+    "pcc_ramp_limit_mw_per_s", "reason_codes", "active_constraints",
+    "controller_version"
+  ],
+  "properties": {
+    "mode": {"enum": ["safe_hold", "normal_optimize", "precool_and_charge", "grid_support", "voltage_ride_through", "power_quality_mitigation"]},
+    "advisory_only": {"type": "boolean"},
+    "bess_active_power_mw": {"type": "number", "description": "Positive discharges toward the facility bus."},
+    "bess_reactive_power_mvar": {"type": "number", "description": "Positive injects reactive power toward the facility bus."},
+    "thermal_power_mw": {"type": "number", "description": "Positive discharges thermal storage and reduces instantaneous cooling electrical demand."},
+    "it_defer_mw": {"type": "number", "description": "Positive defers approved non-critical compute; negative performs catch-up."},
+    "cooling_setpoint_delta_c": {"type": "number"},
+    "active_filter_percent": {"type": "number", "minimum": 0, "maximum": 100},
+    "pcc_ramp_limit_mw_per_s": {"type": "number", "minimum": 0},
+    "reason_codes": {"type": "array", "items": {"type": "string"}},
+    "active_constraints": {"type": "array", "items": {"type": "string"}},
+    "controller_version": {"type": "string"}
+  }
+}

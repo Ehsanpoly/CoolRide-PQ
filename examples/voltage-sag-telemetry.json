@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-08-19T18:03:00+00:00",
+  "hour": 18.05,
+  "quality": "good",
+  "pcc_active_power_mw": 64.2,
+  "pcc_reactive_power_mvar": 5.1,
+  "pcc_voltage_pu": 0.886,
+  "frequency_hz": 59.97,
+  "thdv_percent": 5.6,
+  "it_power_mw": 48.5,
+  "cooling_power_mw": 13.8,
+  "maximum_inlet_temperature_c": 24.2,
+  "bess_soc": 0.68,
+  "thermal_soc": 0.55,
+  "grid_alert": true,
+  "operator_enable": true
+}

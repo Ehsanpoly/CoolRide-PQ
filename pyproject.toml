@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coolride-pq"
+version = "0.1.0"
+description = "Open grid-aware orchestration and evidence for data-center power and cooling"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "CoolRide-PQ contributors" }]
+dependencies = []
+
+[project.optional-dependencies]
+api = ["fastapi>=0.115", "uvicorn>=0.30"]
+science = ["numpy>=2.0", "matplotlib>=3.9"]
+dev = ["pytest>=8.0", "ruff>=0.9", "mypy>=1.14"]
+
+[project.scripts]
+coolride-pq = "coolride_pq.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

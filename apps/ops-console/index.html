@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="CoolRide-PQ advisory operations console">
+  <title>CoolRide-PQ Operations Console</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">GRID-AWARE DATA CENTER ORCHESTRATION</p>
+      <h1>CoolRide-PQ</h1>
+      <p class="subtitle">50 MW IT reference campus · power, cooling, storage and PCC evidence</p>
+    </div>
+    <div class="status"><span class="status-dot"></span>Advisory only · synthetic scenario</div>
+  </header>
+
+  <main>
+    <section class="metrics" aria-label="Scenario metrics">
+      <article><span>Net energy change</span><strong id="metric-energy">—</strong><small id="metric-energy-detail">—</small></article>
+      <article><span>Peak demand reduction</span><strong id="metric-peak">—</strong><small id="metric-peak-detail">—</small></article>
+      <article><span>Minimum PCC voltage</span><strong id="metric-voltage">—</strong><small>baseline → controlled</small></article>
+      <article><span>Maximum voltage THD</span><strong id="metric-thd">—</strong><small>baseline → controlled</small></article>
+    </section>
+
+    <section class="workspace">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">DETERMINISTIC 24-HOUR REPLAY</p>
+          <h2>Facility and grid response</h2>
+        </div>
+        <div class="legend" aria-label="Chart legend">
+          <span><i class="baseline"></i>Baseline</span>
+          <span><i class="controlled"></i>CoolRide-PQ</span>
+          <span><i class="threshold"></i>Threshold</span>
+          <span><i class="bess"></i>BESS P</span>
+          <span><i class="q-support"></i>BESS Q</span>
+          <span><i class="thermal"></i>Thermal</span>
+          <span><i class="it-shift"></i>IT shift</span>
+        </div>
+      </div>
+      <div class="chart-shell" id="chart-shell">
+        <svg id="scenario-chart" role="img" aria-label="Four linked charts of PCC power, voltage, voltage THD and controller actions over 24 hours"></svg>
+        <div class="tooltip" id="chart-tooltip" hidden></div>
+      </div>
+      <div class="mode-row" aria-label="Operating mode timeline">
+        <span>Controller mode</span>
+        <div class="mode-track" id="mode-track"></div>
+      </div>
+    </section>
+
+    <section class="lower-grid">
+      <article class="panel">
+        <div class="section-heading compact">
+          <div><p class="eyebrow">REFERENCE DESIGN</p><h2>Conceptual sizing</h2></div>
+        </div>
+        <dl class="sizing-grid" id="sizing-grid"><div><dt>Loading</dt><dd>—</dd></div></dl>
+      </article>
+      <article class="panel">
+        <div class="section-heading compact">
+          <div><p class="eyebrow">SAFETY BOUNDARY</p><h2>What the controller may do</h2></div>
+        </div>
+        <ol class="response-list">
+          <li><b>Normal:</b> raise cooling setpoint inside thermal reserve; recharge storage off-peak.</li>
+          <li><b>Grid alert:</b> discharge BESS/TES, defer bounded non-critical compute, limit recovery ramp.</li>
+          <li><b>Voltage sag:</b> prioritize converter reactive support, suppress simultaneous load recovery, record the event.</li>
+          <li><b>Bad data or low reserve:</b> return to safe hold; never bypass UPS, protection or OEM interlocks.</li>
+        </ol>
+      </article>
+    </section>
+
+    <p class="disclaimer">Illustrative engineering model only. No field calibration, utility equivalent, protection study, tariff model or equipment warranty is represented.</p>
+  </main>
+  <script type="module" src="/dist/main.js"></script>
+</body>
+</html>
