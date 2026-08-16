@@ -13,9 +13,9 @@ Thank you for helping build an open evidence and orchestration layer for grid-aw
 ## Development workflow
 
 ```bash
-./scripts/test.sh
-./scripts/build_cpp.sh
-./scripts/generate_demo.sh
+bash ./scripts/test.sh
+bash ./scripts/build_cpp.sh
+bash ./scripts/generate_demo.sh
 ```
 
 Keep the zero-dependency Python vertical slice functional. New production integrations may use optional dependencies but must preserve deterministic fixtures and reason-coded failure behavior.
