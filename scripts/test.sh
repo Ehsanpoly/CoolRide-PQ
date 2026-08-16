@@ -20,13 +20,29 @@ fi
 
 "${test_binary}"
 
-if [[ ! -x "${ops_console_dir}/node_modules/.bin/tsc" ]]; then
-  echo "TypeScript dependencies are missing. Run: npm --prefix ${ops_console_dir} ci" >&2
+if ! command -v node >/dev/null 2>&1 || ! command -v npm >/dev/null 2>&1; then
+  echo "Node.js and npm are required for the operations-console checks." >&2
   exit 127
 fi
 
-npm --prefix "${ops_console_dir}" run typecheck
-npm --prefix "${ops_console_dir}" run build
+if [[ ! -f "${ops_console_dir}/package-lock.json" ]]; then
+  echo "Missing ${ops_console_dir}/package-lock.json; commit the lock file." >&2
+  exit 2
+fi
+
+typescript_compiler="${ops_console_dir}/node_modules/typescript/bin/tsc"
+if [[ ! -f "${typescript_compiler}" ]]; then
+  echo "TypeScript dependencies are absent; installing locked development dependencies."
+  npm --prefix "${ops_console_dir}" ci --include=dev --no-audit --no-fund
+fi
+
+if [[ ! -f "${typescript_compiler}" ]]; then
+  echo "TypeScript compiler was not installed at ${typescript_compiler}." >&2
+  exit 127
+fi
+
+node "${typescript_compiler}" --noEmit -p "${ops_console_dir}/tsconfig.json"
+node "${typescript_compiler}" -p "${ops_console_dir}/tsconfig.json"
 node --check "${ops_console_dir}/dist/main.js"
 
 echo "All Python, C++ and browser-JavaScript checks passed."
