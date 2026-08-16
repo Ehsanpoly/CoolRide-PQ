@@ -47,12 +47,13 @@ Control is separated into three time scales:
 
 ## Quick start
 
-Requirements: Python 3.11+, a C++20 compiler, and a modern browser. The zero-dependency demo uses only the Python standard library.
+Requirements: Python 3.11+, a C++20 compiler, Node.js 22+, npm, and a modern browser. The runtime API itself uses only the Python standard library; Node.js is used to build and validate the TypeScript console.
 
 ```bash
-./scripts/test.sh
-./scripts/build_cpp.sh
-./scripts/run_demo.sh
+bash ./scripts/bootstrap.sh
+bash ./scripts/test.sh
+bash ./scripts/build_cpp.sh
+bash ./scripts/run_demo.sh
 ```
 
 Open `http://127.0.0.1:8080`. Useful endpoints:
@@ -66,7 +67,7 @@ Open `http://127.0.0.1:8080`. Useful endpoints:
 Generate the scenario and public graphics without starting the server:
 
 ```bash
-./scripts/generate_demo.sh
+bash ./scripts/generate_demo.sh
 ```
 
 ## Repository map

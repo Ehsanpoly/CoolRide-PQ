@@ -2,6 +2,7 @@
 set -euo pipefail
 
 repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ops_console_dir="${repo_dir}/apps/ops-console"
 export PYTHONPATH="${repo_dir}/src${PYTHONPATH:+:${PYTHONPATH}}"
 
 python3 -m unittest discover -s "${repo_dir}/tests" -p "test_*.py" -v
@@ -18,6 +19,14 @@ if command -v file >/dev/null 2>&1; then
 fi
 
 "${test_binary}"
-node --check "${repo_dir}/apps/ops-console/dist/main.js"
+
+if [[ ! -x "${ops_console_dir}/node_modules/.bin/tsc" ]]; then
+  echo "TypeScript dependencies are missing. Run: npm --prefix ${ops_console_dir} ci" >&2
+  exit 127
+fi
+
+npm --prefix "${ops_console_dir}" run typecheck
+npm --prefix "${ops_console_dir}" run build
+node --check "${ops_console_dir}/dist/main.js"
 
 echo "All Python, C++ and browser-JavaScript checks passed."
