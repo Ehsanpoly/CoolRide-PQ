@@ -187,7 +187,7 @@ async function bootstrap(): Promise<void> {
     drawChart();
     new ResizeObserver(drawChart).observe(shell);
   } catch (error) {
-    document.querySelector("main")!.innerHTML = `<section class="panel"><h2>Console unavailable</h2><p class="disclaimer">Start the local service with ./scripts/run_demo.sh. ${String(error)}</p></section>`;
+    document.querySelector("main")!.innerHTML = `<section class="panel"><h2>Console unavailable</h2><p class="disclaimer">Start the local service with bash ./scripts/run_demo.sh. ${String(error)}</p></section>`;
   }
 }
 
